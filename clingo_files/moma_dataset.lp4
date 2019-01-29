@@ -1,0 +1,20 @@
+% artist(NAME, ID, BIRTHDATE, DEATHDATE)
+artist(pablo_picasso, 4609, 1881, 1973).
+artist(artko, 18, 0, 0).
+artist(yayoi_kusama, 3315, 1929, 0).
+artist(picasso, 4609, 1881, 1912).
+artist(kusama, 3315, 1829, 1929).
+
+% artwork(TITLE, ARTIST, ARTIST_ID, YEAR_PAINTED)
+artwork(seated_woman, pablo_picasso, 4609, 1934).
+artwork(war_and_peace, picasso, 4609, 1955).
+artwork(flower, yayoi_kusama, 3315, 1953).
+artwork(endless, yayoi_kusama, 3315, 1984).
+artwork(accumulation, kusama, 3315, 2027).
+artwork(war, picasso, 4609, 1988).
+artwork(acapulco_gold, artko, 18, 1967).
+%artwork(some_picasso_painting, pablo_picasso, 4609, 1911).
+%artwork(made_up_name, artko, 18, 1855).
+
+new_artist(NAME, ID, BIRTHDATE, DEATHDATE) :- artist(NAME, ID, BIRTHDATE, DEATHDATE).
+new_artwork(TITLE, ARTIST, ARTIST_ID, YEAR_PAINTED) :- artwork(TITLE, ARTIST, ARTIST_ID, YEAR_PAINTED).
