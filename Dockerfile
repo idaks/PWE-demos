@@ -25,5 +25,7 @@ RUN pip install PW_explorer
 RUN cd ~ && \
 	mkdir asp
 
+COPY *.ipynb $HOME/work/
+COPY clingo_files $HOME/work/
 
 MAINTAINER Nikolaus Parulian <nikolaus.nova@gmail.com>
