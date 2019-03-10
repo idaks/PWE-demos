@@ -1,0 +1,37 @@
+% -*- Mode: Prolog -*-
+
+#const current_year=2019.
+
+% Integrity Constraint Violation for ARTIST_ID (denial):
+icv_PK(ID, NAME1, NAME2, X1, Y1, X2, Y2) :- artist(NAME1, ID, X1, Y1), artist(NAME2, ID, X2, Y2), NAME1 != NAME2.
+
+% Make sure there's exactly one record per ARTIST_ID
+del_artist(NAME1, ID, X1, Y1) ; del_artist(NAME2,ID, X2,Y2) :- icv_PK(ID,NAME1, NAME2, X1, Y1, X2, Y2).
+
+% Artist DB Repair
+% define new_artist(NAME, ID, BIRTHDATE, DEATHDATE)
+new_artist(NAME,ID,BD,DD) :- artist(NAME,ID,BD,DD), not del_artist(NAME, ID, BD,DD).
+
+% Keep atleast one artist entry per ID
+:- artist(_, ID, _, _), not new_artist(_, ID, _, _).
+
+% Integrity Constraint Violation: ARTIST_NAME or ARTIST_ID mismatch in the artworks record.
+% define icv_FK(TITLE, ARTIST_ID)
+icv_FK(TITLE, ARTIST_ID) :- artwork(TITLE, ARTIST, ARTIST_ID, YEAR_PAINTED), not new_artist(ARTIST, ARTIST_ID, _, _).
+
+% Adding Date Integrity Constraint Violation Checks: Artwork Date not within Artist's Lifetime
+% define icv_DATE(TITLE)
+icv_DATE(TITLE) :- artwork(TITLE, ARTIST, ARTIST_ID, YEAR), new_artist(NAME, ARTIST_ID, BIRTHDATE, DEATHDATE), YEAR > DEATHDATE, DEATHDATE != 0, DEATHDATE != -1.
+icv_DATE(TITLE) :- artwork(TITLE, ARTIST, ARTIST_ID, YEAR), new_artist(NAME, ARTIST_ID, BIRTHDATE, DEATHDATE), YEAR < BIRTHDATE, BIRTHDATE != -1.
+
+% Adding Integrity Constraint Violation Check: Painting dated in the future
+% define icv_FUTURE(TITLE)
+icv_FUTURE(TITLE) :- artwork(TITLE, ARTIST, ARTIST_ID, YEAR), new_artist(NAME, ARTIST_ID, BIRTHDATE, DEATHDATE), YEAR > current_year.
+
+% Artwork DB Repair
+% Fixing the ARTIST_NAME/ARTIST_ID mismatch error if possible.
+% define new_artwork(TITLE, ARTIST, ARTIST_ID, YEAR_PAINTED)
+new_artwork(TITLE, ARTIST, ARTIST_ID, YEAR) :- icv_FK(TITLE, ARTIST_ID), artwork(TITLE, W_ARTIST, ARTIST_ID, YEAR), new_artist(ARTIST, ARTIST_ID, _, _), not icv_DATE(TITLE), not icv_FUTURE(TITLE).
+
+% Keeping the artworks with no constraint violations
+new_artwork(TITLE, ARTIST, ARTIST_ID, YEAR) :- artwork(TITLE, ARTIST, ARTIST_ID, YEAR), not icv_FK(TITLE, ARTIST_ID), not icv_DATE(TITLE), not icv_FUTURE(TITLE).

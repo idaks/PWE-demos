@@ -1,0 +1,4 @@
+% -*- Mode: Prolog -*-
+% define col(nodeID, color)
+col(X,red) ; col(X,green) ; col(X,blue) :- node(X).   % .. with choice rule to generate colorings
+:- e(X,Y), col(X,C), col(Y,C), X != Y.                % .. and IC: no neighbors with same color!

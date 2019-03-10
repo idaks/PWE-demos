@@ -1,0 +1,10 @@
+% -*- Mode: Prolog -*-
+
+#const num_disks=3.
+% define peg(PEG_ID)
+peg(a;b;c).
+
+% define e(DISK1_INIT_PEG, DISK2_INIT_PEG, DISK3_INIT_PEG, DISK1_FINAL_PEG, DISK2_FINAL_PEG, DISK3_FINAL_PEG)
+e(D1, D2, D3, D1_, D2, D3) :- peg(D1), peg(D2), peg(D3), peg(D1_), D1 != D1_.
+e(D1, D2, D3, D1, D2_, D3) :- peg(D1), peg(D2), peg(D3), peg(D2_), D2 != D2_, D1 != D2, D1 != D2_.
+e(D1, D2, D3, D1, D2, D3_) :- peg(D1), peg(D2), peg(D3), peg(D3_), D3 != D3_, D1 != D3, D2 != D3, D1 != D3_, D2 != D3_.

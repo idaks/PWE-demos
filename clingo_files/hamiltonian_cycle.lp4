@@ -1,0 +1,14 @@
+% http://www.cs.utexas.edu/~wcook/Courses/398T-F08/Lifschitz.pdf
+n(X):- e(X,_).
+n(X):- e(_,X).
+1 { in(X,Y) ; out(X,Y) } 1 :- e(X,Y).
+
+% start(1).  %% NEEDS TO BE PROVIDED
+:- 2 {in(X,Y) : e(X,Y)}, n(X).
+:- 2 {in(X,Y) : e(X,Y)}, n(Y).
+r(X) :- in(Y,X), n(X), start(Y).
+r(Y) :- r(X), in(X,Y), e(X,Y).
+:- not r(X), n(X).
+:- in(X,Y), in(Y,X).
+
+#show in/2.

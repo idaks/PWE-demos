@@ -1,0 +1,56 @@
+% -*- Mode: Prolog -*-
+
+%% PREFERENCES:
+
+% M1 -> {W1}, {W2, W3}, {}
+% M2 -> {W2}, {W1}
+% W1 -> {M1, M2}, {}
+% W2 -> {M1}, {}
+% W3 -> {M2}, {M1}, {}
+
+%% ASSOC. COSTS
+% define cost(BEARER, MATCH, COST)
+
+cost(m1, w1, 1).
+cost(m1, w2, 2).
+cost(m1, w3, 2).
+cost(m1, m1, 3).
+
+cost(m2, w2, 1).
+cost(m2, w1, 2).
+cost(m2, m2, 2).
+
+cost(w1, m1, 1).
+cost(w1, m2, 1).
+cost(w1, w1, 2).
+
+cost(w2, m1, 1).
+cost(w2, w2, 2).
+
+cost(w3, m2, 1).
+cost(w3, m1, 2).
+cost(w3, w3, 3).
+
+
+%% RULES
+
+% define accept(PERSON1, PERSON2)
+% define manpropose(MAN_PROPOSER, WOMAN_PROPOSEE)
+% define womanpropose(MAN_PROPOSEE, WOMAN_PROPOSER)
+
+accept(X, Y) :- manpropose(X, Y), womanpropose(X, Y).
+manpropose(m1, w1).
+manpropose(m1, w2) :- not accept(m1, w1), not accept(m1, w3).
+manpropose(m1, w3) :- not accept(m1, w1), not accept(m1, w2).
+accept(m1, m1) :- not accept(m1, w1), not accept(m1, w2), not accept(m1, w3).
+manpropose(m2, w2).
+manpropose(m2, w1) :- not accept(m2, w2), not accept(m2, m2).
+accept(m2, m2) :- not accept(m2, w2), not accept(m2, w1).
+womanpropose(m1, w1) :- not accept(m2, w1).
+womanpropose(m2, w1) :- not accept(m1, w1).
+accept(w1, w1) :- not accept(m1, w1), not accept(m2, w1).
+womanpropose(m1, w2).
+accept(w2, w2) :- not accept(m1, w2).
+womanpropose(m2, w3).
+womanpropose(m1, w3) :- not accept(m2, w3).
+accept(w3, w3) :- not accept(m1, w3), not accept(m2, w3).

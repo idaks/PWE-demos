@@ -1,0 +1,25 @@
+% -*- Mode: Prolog -*-
+
+e(X,Y) :- e(Y,X).
+node(X) :- e(X,_).
+node(X) :- e(_,X).
+
+c(X) :- col(_,_,X).
+
+vmap(X,Y) ; vout(X,Y) :- node(X), node(Y).
+:- vmap(X1,Y1), vmap(X2,Y2), e(X1,X2), not e(Y1,Y2).
+:- vmap(X1,Y1), vmap(X2,Y2), not e(X1,X2), e(Y1,Y2).
+used1(X) :- vmap(X,_).
+:- node(X), not used1(X).
+:- vmap(X,Y),vmap(X,Z),Y!=Z.
+:- vmap(Y,X),vmap(Z,X),Y!=Z.
+
+cmap(X,Y) ; cout(X,Y) :- c(X), c(Y).
+usedc(X) :- cmap(X,_).
+:- c(X), not usedc(X).
+:- cmap(X,Y), cmap(X, Z), Y!=Z.
+:- cmap(X,Y), vmap(V1, V2), col(1, V1, X), not col(2, V2, Y).
+:- cmap(X,Y), vmap(V1, V2), not col(1, V1, X), col(2, V2, Y).
+
+#show vmap/2.
+#show cmap/2.

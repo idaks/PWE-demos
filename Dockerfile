@@ -23,9 +23,10 @@ RUN pip install PW_explorer
 
 # prepare a home directory for answer set programming
 RUN cd ~ && \
-	mkdir asp
+	mkdir pwe
 
-COPY *.ipynb $HOME/work/
-COPY clingo_files $HOME/work/
+RUN mkdir $HOME/pwe/clingo_files
+COPY *.ipynb $HOME/pwe/
+COPY clingo_files $HOME/pwe/clingo_files
 
 MAINTAINER Nikolaus Parulian <nikolaus.nova@gmail.com>
