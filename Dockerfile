@@ -20,6 +20,8 @@ RUN conda install -c anaconda pygraphviz
 
 # install PW_explorer	
 RUN pip install PW_explorer
+# install seaborn: required by the 3COL Notebook
+RUN pip install seaborn
 
 # prepare a home directory for answer set programming
 RUN cd ~ && \
