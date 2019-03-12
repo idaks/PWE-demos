@@ -1,5 +1,3 @@
-% -*- Mode: Prolog -*-
-
 #const num_disks=3.
 % define peg(PEG_ID)
 peg(a;b;c).

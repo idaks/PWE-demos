@@ -1,5 +1,3 @@
-% -*- Mode: Prolog -*-
-
 % Generate
 { move(T,D,P) : disk(D), peg(P) } = 1 :- moves(M),  T = 1..M.
 % define move(TIME, DISK)

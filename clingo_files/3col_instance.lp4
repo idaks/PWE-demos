@@ -1,4 +1,3 @@
-% -*- Mode: Prolog -*-
 % define node(nodeID)
 % define e(nodeID1, nodeID2)
 node(1..5).  e(1,2). e(2,3). e(3,4). e(4,1). e(4,5).  % a small sample graph

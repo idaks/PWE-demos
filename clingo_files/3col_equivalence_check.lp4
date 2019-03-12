@@ -1,5 +1,3 @@
-% -*- Mode: Prolog -*-
-
 e(X,Y) :- e(Y,X).
 node(X) :- e(X,_).
 node(X) :- e(_,X).

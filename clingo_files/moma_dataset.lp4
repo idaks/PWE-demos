@@ -1,5 +1,3 @@
-% -*- Mode: Prolog -*-
-
 % define artist(NAME, ID, BIRTHDATE, DEATHDATE)
 artist(pablo_picasso, 4609, 1881, 1973).
 artist(artko, 18, 0, 0).
