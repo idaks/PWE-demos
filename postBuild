@@ -1,0 +1,5 @@
+#!/bin/bash
+wget http://www.dlvsystem.com/files/dlv.x86-64-linux-elf-static.bin -O dlv
+chmod +x dlv
+mkdir -p .local/bin
+mv dlv .local/bin/

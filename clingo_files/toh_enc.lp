@@ -1,12 +1,12 @@
 % Generate
 { move(T,D,P) : disk(D), peg(P) } = 1 :- moves(M),  T = 1..M.
-% define move(TIME, DISK)
+% schema move(TIME, DISK)
 % temporal move(T,_)
-% define move(TIME, DISK, PEG)
+% schema move(TIME, DISK, PEG)
 % temporal move(T,_,_)
-% define on(TIME, DISK, PEG)
+% schema on(TIME, DISK, PEG)
 % temporal on(T,_,_)
-% define blocked(TIME, DISK, PEG)
+% schema blocked(TIME, DISK, PEG)
 % temporal blocked(T,_,_)
 move(T,D)   :- move(T,D,_).
 on(0,D,P)   :- init_on(D,P).

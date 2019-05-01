@@ -1,11 +1,11 @@
-% define artist(NAME, ID, BIRTHDATE, DEATHDATE)
+% schema artist(NAME, ID, BIRTHDATE, DEATHDATE)
 artist(pablo_picasso, 4609, 1881, 1973).
 artist(artko, 18, 0, 0).
 artist(yayoi_kusama, 3315, 1929, 0).
 artist(picasso, 4609, 1881, 1912).
 artist(kusama, 3315, 1829, 1929).
 
-% define artwork(TITLE, ARTIST, ARTIST_ID, YEAR_PAINTED)
+% schema artwork(TITLE, ARTIST, ARTIST_ID, YEAR_PAINTED)
 artwork(seated_woman, pablo_picasso, 4609, 1934).
 artwork(war_and_peace, picasso, 4609, 1955).
 artwork(flower, yayoi_kusama, 3315, 1953).

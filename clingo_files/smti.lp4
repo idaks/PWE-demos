@@ -7,7 +7,7 @@
 % W3 -> {M2}, {M1}, {}
 
 %% ASSOC. COSTS
-% define cost(BEARER, MATCH, COST)
+% schema cost(BEARER, MATCH, COST)
 
 cost(m1, w1, 1).
 cost(m1, w2, 2).
@@ -32,9 +32,9 @@ cost(w3, w3, 3).
 
 %% RULES
 
-% define accept(PERSON1, PERSON2)
-% define manpropose(MAN_PROPOSER, WOMAN_PROPOSEE)
-% define womanpropose(MAN_PROPOSEE, WOMAN_PROPOSER)
+% schema accept(PERSON1, PERSON2)
+% schema manpropose(MAN_PROPOSER, WOMAN_PROPOSEE)
+% schema womanpropose(MAN_PROPOSEE, WOMAN_PROPOSER)
 
 accept(X, Y) :- manpropose(X, Y), womanpropose(X, Y).
 manpropose(m1, w1).

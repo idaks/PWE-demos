@@ -1,14 +1,14 @@
 e(X,Y) :- e(Y,X).
-node(X) :- e(X,_).
-node(X) :- e(_,X).
+gnode(X) :- e(X,_).
+gnode(X) :- e(_,X).
 
 c(X) :- col(_,_,X).
 
-vmap(X,Y) ; vout(X,Y) :- node(X), node(Y).
+vmap(X,Y) ; vout(X,Y) :- gnode(X), gnode(Y).
 :- vmap(X1,Y1), vmap(X2,Y2), e(X1,X2), not e(Y1,Y2).
 :- vmap(X1,Y1), vmap(X2,Y2), not e(X1,X2), e(Y1,Y2).
 used1(X) :- vmap(X,_).
-:- node(X), not used1(X).
+:- gnode(X), not used1(X).
 :- vmap(X,Y),vmap(X,Z),Y!=Z.
 :- vmap(Y,X),vmap(Z,X),Y!=Z.
 
